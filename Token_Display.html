@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deriv App Registration Data</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        .container {
+            background-color: #f5f5f5;
+            padding: 20px;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+        .account-info {
+            margin-bottom: 15px;
+            padding: 10px;
+            background-color: green;
+            border-radius: 15px;
+        }
+        h1 {
+            color: #333;
+        }
+        .hidden {
+            display: none;
+        }
+        .token {
+            font-family: monospace;
+			color: blue;
+			word-break: break-all;
+        }
+    </style>
+</head>
+<body>
+    <h1>Deriv App Registration Data</h1>
+    
+    <div id="no-data" class="container hidden">
+        <p>No registration data found in the URL.</p>
+        <p>This page is meant to be used as a redirect URL for Deriv app registration.</p>
+    </div>
+    
+    <div id="data-container" class="container hidden">
+        <h2>Account Information</h2>
+        
+        <div class="account-info">
+            <h3>Real Account</h3>
+            <p><strong>Account Number:</strong> <span id="acct1"></span></p>
+            <p><strong>Currency:</strong> <span id="cur1"></span></p>
+            <p><strong>Token:</strong> <span id="token1-display" class="token"></span></p>
+        </div>
+        
+        <div class="account-info">
+            <h3>Demo Account</h3>
+            <p><strong>Account Number:</strong> <span id="acct2"></span></p>
+            <p><strong>Currency:</strong> <span id="cur2"></span></p>
+            <p><strong>Token:</strong> <span id="token2-display" class="token"></span></p>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Get URL parameters
+            const urlParams = new URLSearchParams(window.location.search);
+            
+            if (urlParams.toString()) {
+                // Show data container
+                document.getElementById('data-container').classList.remove('hidden');
+                
+                // Display account information
+                document.getElementById('acct1').textContent = urlParams.get('acct1') || 'Not provided';
+                document.getElementById('cur1').textContent = urlParams.get('cur1') || 'Not provided';
+                document.getElementById('token1-display').textContent = urlParams.get('token1') || 'Not provided';
+                
+                document.getElementById('acct2').textContent = urlParams.get('acct2') || 'Not provided';
+                document.getElementById('cur2').textContent = urlParams.get('cur2') || 'Not provided';
+                document.getElementById('token2-display').textContent = urlParams.get('token2') || 'Not provided';
+            } else {
+                // Show no data message
+                document.getElementById('no-data').classList.remove('hidden');
+            }
+        });
+    </script>
+</body>
+</html>
